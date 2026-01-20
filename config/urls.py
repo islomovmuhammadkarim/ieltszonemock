@@ -7,6 +7,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('mocks/', include('mocks.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('listening/', include('listening.urls')),
 ]
 
 # media serve (dev)

@@ -1,34 +1,39 @@
-{% extends 'layouts/base.html' %}
+{% extends 'layouts/master.html' %}
 {% load static %}
 
 {% block title %}Qoidalar va FAQ — IELTS CORE{% endblock %}
 
 {% block content %}
-<div class="container" style="padding-top: 60px;">
+<div class="container">
   
-  <section class="page-head" style="margin-bottom: 50px; text-align: center;">
-    <h1 class="h1">Foydalanish <span>Qoidalari</span></h1>
-    <p class="lead" style="color: var(--text-dim); max-width: 700px; margin: 0 auto;">
-      Platformadan to'g'ri foydalanish, mock topshirish tartibi va natijalarni olish bo'yicha batafsil ma'lumotlar.
+  <section style="padding: 80px 0 40px; text-align: center;">
+    <div class="badge" style="background: rgba(79, 140, 255, 0.1); color: var(--brand); border-color: rgba(79, 140, 255, 0.2);">
+        HELP CENTER
+    </div>
+    <h1 style="font-size: clamp(32px, 5vw, 54px); letter-spacing: -2px; line-height: 1; margin: 20px 0;">
+      Foydalanish <span>Qoidalari</span>
+    </h1>
+    <p class="lead" style="max-width: 600px; margin: 0 auto; color: var(--muted);">
+      Platformadan to'g'ri foydalanish, imtihon topshirish tartibi va natijalarni olish bo'yicha qo'llanma.
     </p>
   </section>
 
-  <section class="grid" style="display: grid; gap: 12px; max-width: 900px; margin: 0 auto;">
+  <section class="faq-grid">
     
     <details class="faq-item-card" open>
       <summary class="faq-summary">
         <span>Natija chiqish muddati</span>
-        <span class="badge-red">SLA</span>
+        <span class="badge-ios" style="color: var(--brand2);">SLA</span>
       </summary>
       <div class="faq-content">
-        Har bir topshirilgan mock <b>5 ish kuni</b> ichida tekshiriladi. Shanba va yakshanba dam olish kunlari hisoblanadi.
+        Har bir topshirilgan mock <b>5 ish kuni</b> ichida tekshiriladi. Shanba va yakshanba dam olish kunlari hisoblanadi. Natija dashboard'da e'lon qilinadi.
       </div>
     </details>
 
     <details class="faq-item-card">
       <summary class="faq-summary">
         <span>Writing topshirish tartibi</span>
-        <span class="badge-red">Writing</span>
+        <span class="badge-ios">Writing</span>
       </summary>
       <div class="faq-content">
         Writing bo'limida Task 1 va Task 2 matnlarini kiritish vaqtida <b>Draft</b> tugmasini bosib saqlab qo'yish mumkin. <b>Submit Final</b> bosilgandan so'ng tahrirlash imkoniyati butunlay yopiladi.
@@ -38,7 +43,7 @@
     <details class="faq-item-card">
       <summary class="faq-summary">
         <span>Speaking audio sifati</span>
-        <span class="badge-red">Speaking</span>
+        <span class="badge-ios">Speaking</span>
       </summary>
       <div class="faq-content">
         Audio faylni yuklayotganda shovqinlar yo'qligiga ishonch hosil qiling. Agar audio sifati juda yomon bo'lsa (tushunarsiz bo'lsa), examiner mockni bekor qilishi mumkin.
@@ -48,9 +53,10 @@
     <details class="faq-item-card">
       <summary class="faq-summary">
         <span>Baholash mezonlari (Criteria)</span>
-        <span class="badge-red">Scoring</span>
+        <span class="badge-ios" style="color: var(--warning);">Scoring</span>
       </summary>
       <div class="faq-content">
+        
         Barcha mocklar rasmiy IELTS Band Descriptors (Public version) asosida baholanadi. Har bir kriteriya (TR, CC, LR, GRA) uchun alohida feedback beriladi.
       </div>
     </details>
@@ -58,53 +64,33 @@
     <details class="faq-item-card">
       <summary class="faq-summary">
         <span>Plagiat (Nusxa ko'chirish)</span>
-        <span class="badge-red" style="border-color: #ff4444; color: #ff4444;">Warning</span>
+        <span class="badge-ios" style="color: var(--danger); border-color: rgba(239, 68, 68, 0.3);">Warning</span>
       </summary>
       <div class="faq-content">
-        Agar Writing javoblari internetdan yoki AI (ChatGPT) yordamida ko'chirilganligi aniqlansa, natija berilmaydi va mablag' qaytarilmaydi.
+        Agar Writing javoblari internetdan yoki AI (ChatGPT) yordamida ko'chirilganligi aniqlansa, natija berilmaydi va mablag' qaytarilmaydi. Bizda anti-plagiat tizimi mavjud.
       </div>
     </details>
 
     <details class="faq-item-card">
       <summary class="faq-summary">
         <span>Pulni qaytarish siyosati</span>
-        <span class="badge-red" style="border-color: #ff4444; color: #ff4444;">Policy</span>
+        <span class="badge-ios">Policy</span>
       </summary>
       <div class="faq-content">
         To'lov qilinganidan so'ng 24 soat ichida (agar mock topshirilmagan bo'lsa) qaytarishni so'rash mumkin. Tekshiruv boshlangach pul qaytarilmaydi.
       </div>
     </details>
 
-    <details class="faq-item-card">
-      <summary class="faq-summary">
-        <span>Natijalarni saqlash muddati</span>
-        <span class="badge-red">Result</span>
-      </summary>
-      <div class="faq-content">
-        Sizning natijalaringiz va examiner feedbacklari platformada <b>6 oy</b> davomida saqlanadi. Shundan so'ng arxivga o'tkaziladi.
-      </div>
-    </details>
-
-    <details class="faq-item-card">
-      <summary class="faq-summary">
-        <span>Texnik muammolar</span>
-        <span class="badge-red">Support</span>
-      </summary>
-      <div class="faq-content">
-        Agar fayl yuklashda yoki platformada xatolik yuz bersa, darhol qo'llab-quvvatlash xizmatiga (Telegram bot orqali) xabar bering.
-      </div>
-    </details>
-
   </section>
 
   <section style="margin: 80px 0;">
-    <div class="card" style="padding: 40px; border-radius: 24px; text-align: center; border-color: var(--primary-red);">
-      <h3 style="font-family: 'Outfit'; font-size: 28px; margin-bottom: 10px;">Tayyormisiz?</h3>
-      <p class="muted" style="margin-bottom: 30px;">Qoidalar bilan tanishgan bo'lsangiz, mock topshirishni boshlang.</p>
+    <div class="card" style="padding: 60px 40px; text-align: center; background: linear-gradient(145deg, rgba(79, 140, 255, 0.1), rgba(0,0,0,0));">
+      <h3 style="font-size: 32px; font-weight: 800; margin-bottom: 10px; letter-spacing: -1px;">Tayyormisiz?</h3>
+      <p class="muted" style="margin-bottom: 35px; font-size: 17px;">Qoidalar bilan tanishgan bo'lsangiz, mock topshirishni boshlang va o'z darajangizni aniqlang.</p>
       
       <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-        <a class="btn btn-primary" href="/pricing">Paketlarni ko'rish</a>
-        <a class="btn btn-primary" href="/login" style="background: transparent; border: 1px solid var(--primary-red);">Profilga kirish</a>
+        <a class="btn btn-primary" href="{% url 'home' %}" style="padding: 16px 32px; border-radius: 16px;">Paketlarni ko'rish</a>
+        <a class="btn" href="{% url 'login' %}" style="background: var(--glass); border: 1px solid var(--border); padding: 16px 32px; border-radius: 16px;">Profilga kirish</a>
       </div>
     </div>
   </section>
