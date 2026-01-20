@@ -1,0 +1,56 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <section class="hero">
+      <div class="hero-text">
+        <h1 class="h1">IELTS Mock <br> <span>Platformasi</span></h1>
+        <p class="lead">MVP bosqichida eng zarur funksiyalar — keyin kengayadi.</p>
+        <br>
+        <a href="#" class="btn btn-primary">Hozir boshlash</a>
+      </div>
+      <div class="video-box">
+        <video autoplay muted loop playsinline>
+          <source src="{% static 'videos/video.mp4' %}" type="video/mp4">
+        </video>
+      </div>
+    </section>
+
+    <h2 class="section-title">Nima olasiz?</h2>
+    <div class="bento">
+      <div class="card">
+        <span class="icon">📝</span>
+        <h3>Writing Mock</h3>
+        <p>Task 1 + Task 2. Draft saqlash va final submit.</p>
+      </div>
+      <div class="card">
+        <span class="icon">🎤</span>
+        <h3>Speaking Mock</h3>
+        <p>Audio upload. Part 1/2/3 savollar to'plami.</p>
+      </div>
+      <div class="card">
+        <span class="icon">📊</span>
+        <h3>Status & Result</h3>
+        <p>Real vaqt rejimida tekshiruv holatini kuzatish.</p>
+      </div>
+    </div>
+
+    <div class="standards">
+      <h3>Tekshiruv standartlari</h3>
+      <ul>
+        <li>Band score + criteria bo‘yicha baholash</li>
+        <li>Qaysi joylar xato: aniq feedback</li>
+        <li>Yaxshilash uchun tavsiya</li>
+      </ul>
+    </div>
+
+    <h2 class="section-title">Tez boshlash</h2>
+    <div class="flow-grid">
+      <div class="flow-item"><div class="flow-num">1</div><h4>Login</h4></div>
+      <div class="flow-item"><div class="flow-num">2</div><h4>Shop</h4></div>
+      <div class="flow-item"><div class="flow-num">3</div><h4>Submit</h4></div>
+      <div class="flow-item"><div class="flow-num">4</div><h4>Result</h4></div>
+    </div>
+</div>
+{% endblock %}
