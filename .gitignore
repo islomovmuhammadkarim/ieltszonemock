@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtualenv
+venv/
+.env
+
+# Django
+*.log
+db.sqlite3
+media/
+
+# Static collected
+staticfiles/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Migrations cache
+*.egg-info/
+dist/
+build/
