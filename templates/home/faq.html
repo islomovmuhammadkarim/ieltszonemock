@@ -5,95 +5,133 @@
 
 {% block content %}
 <div class="container">
-  
-  <section style="padding: 80px 0 40px; text-align: center;">
-    <div class="badge" style="background: rgba(79, 140, 255, 0.1); color: var(--brand); border-color: rgba(79, 140, 255, 0.2);">
-        HELP CENTER
-    </div>
-    <h1 style="font-size: clamp(32px, 5vw, 54px); letter-spacing: -2px; line-height: 1; margin: 20px 0;">
+
+  <!-- Header -->
+  <section class="page-head">
+    <div class="badge badge-brand">HELP CENTER</div>
+
+    <h1 class="page-title">
       Foydalanish <span>Qoidalari</span>
     </h1>
-    <p class="lead" style="max-width: 600px; margin: 0 auto; color: var(--muted);">
+
+    <p class="page-lead">
       Platformadan to'g'ri foydalanish, imtihon topshirish tartibi va natijalarni olish bo'yicha qo'llanma.
     </p>
   </section>
 
+  <!-- FAQ -->
   <section class="faq-grid">
-    
+
     <details class="faq-item-card" open>
       <summary class="faq-summary">
-        <span>Natija chiqish muddati</span>
-        <span class="badge-ios" style="color: var(--brand2);">SLA</span>
+        <div class="faq-summary-title">
+          <div class="faq-toggle">+</div>
+          <span>Natija chiqish muddati</span>
+        </div>
+        <span class="badge-ios sla">SLA</span>
       </summary>
       <div class="faq-content">
-        Har bir topshirilgan mock <b>5 ish kuni</b> ichida tekshiriladi. Shanba va yakshanba dam olish kunlari hisoblanadi. Natija dashboard'da e'lon qilinadi.
+        Har bir topshirilgan mock <b>5 ish kuni</b> ichida tekshiriladi. Shanba va yakshanba dam olish kunlari hisoblanadi.
+        Natija dashboard'da e'lon qilinadi.
       </div>
     </details>
 
     <details class="faq-item-card">
       <summary class="faq-summary">
-        <span>Writing topshirish tartibi</span>
+        <div class="faq-summary-title">
+          <div class="faq-toggle">+</div>
+          <span>Writing topshirish tartibi</span>
+        </div>
         <span class="badge-ios">Writing</span>
       </summary>
       <div class="faq-content">
-        Writing bo'limida Task 1 va Task 2 matnlarini kiritish vaqtida <b>Draft</b> tugmasini bosib saqlab qo'yish mumkin. <b>Submit Final</b> bosilgandan so'ng tahrirlash imkoniyati butunlay yopiladi.
+        Writing bo'limida Task 1 va Task 2 matnlarini kiritish vaqtida <b>Draft</b> tugmasini bosib saqlab qo'yish mumkin.
+        <b>Submit Final</b> bosilgandan so'ng tahrirlash imkoniyati butunlay yopiladi.
       </div>
     </details>
 
     <details class="faq-item-card">
       <summary class="faq-summary">
-        <span>Speaking audio sifati</span>
+        <div class="faq-summary-title">
+          <div class="faq-toggle">+</div>
+          <span>Speaking audio sifati</span>
+        </div>
         <span class="badge-ios">Speaking</span>
       </summary>
       <div class="faq-content">
-        Audio faylni yuklayotganda shovqinlar yo'qligiga ishonch hosil qiling. Agar audio sifati juda yomon bo'lsa (tushunarsiz bo'lsa), examiner mockni bekor qilishi mumkin.
+        Audio faylni yuklayotganda shovqinlar yo'qligiga ishonch hosil qiling.
+        Agar audio sifati juda yomon bo'lsa (tushunarsiz bo'lsa), examiner mockni bekor qilishi mumkin.
       </div>
     </details>
 
     <details class="faq-item-card">
       <summary class="faq-summary">
-        <span>Baholash mezonlari (Criteria)</span>
-        <span class="badge-ios" style="color: var(--warning);">Scoring</span>
+        <div class="faq-summary-title">
+          <div class="faq-toggle">+</div>
+          <span>Baholash mezonlari (Criteria)</span>
+        </div>
+        <span class="badge-ios warn">Scoring</span>
       </summary>
       <div class="faq-content">
-        
-        Barcha mocklar rasmiy IELTS Band Descriptors (Public version) asosida baholanadi. Har bir kriteriya (TR, CC, LR, GRA) uchun alohida feedback beriladi.
+        Barcha mocklar rasmiy IELTS Band Descriptors (Public version) asosida baholanadi.
+        Har bir kriteriya (TR, CC, LR, GRA) uchun alohida feedback beriladi.
       </div>
     </details>
 
     <details class="faq-item-card">
       <summary class="faq-summary">
-        <span>Plagiat (Nusxa ko'chirish)</span>
-        <span class="badge-ios" style="color: var(--danger); border-color: rgba(239, 68, 68, 0.3);">Warning</span>
+        <div class="faq-summary-title">
+          <div class="faq-toggle">+</div>
+          <span>Plagiat (Nusxa ko'chirish)</span>
+        </div>
+        <span class="badge-ios danger">Warning</span>
       </summary>
       <div class="faq-content">
-        Agar Writing javoblari internetdan yoki AI (ChatGPT) yordamida ko'chirilganligi aniqlansa, natija berilmaydi va mablag' qaytarilmaydi. Bizda anti-plagiat tizimi mavjud.
+        Agar Writing javoblari internetdan yoki AI yordamida ko'chirilganligi aniqlansa,
+        natija berilmaydi va mablag' qaytarilmaydi. Bizda anti-plagiat tizimi mavjud.
       </div>
     </details>
 
     <details class="faq-item-card">
       <summary class="faq-summary">
-        <span>Pulni qaytarish siyosati</span>
+        <div class="faq-summary-title">
+          <div class="faq-toggle">+</div>
+          <span>Pulni qaytarish siyosati</span>
+        </div>
         <span class="badge-ios">Policy</span>
       </summary>
       <div class="faq-content">
-        To'lov qilinganidan so'ng 24 soat ichida (agar mock topshirilmagan bo'lsa) qaytarishni so'rash mumkin. Tekshiruv boshlangach pul qaytarilmaydi.
+        To'lov qilinganidan so'ng 24 soat ichida (agar mock topshirilmagan bo'lsa) qaytarishni so'rash mumkin.
+        Tekshiruv boshlangach pul qaytarilmaydi.
       </div>
     </details>
 
   </section>
 
-  <section style="margin: 80px 0;">
-    <div class="card" style="padding: 60px 40px; text-align: center; background: linear-gradient(145deg, rgba(79, 140, 255, 0.1), rgba(0,0,0,0));">
-      <h3 style="font-size: 32px; font-weight: 800; margin-bottom: 10px; letter-spacing: -1px;">Tayyormisiz?</h3>
-      <p class="muted" style="margin-bottom: 35px; font-size: 17px;">Qoidalar bilan tanishgan bo'lsangiz, mock topshirishni boshlang va o'z darajangizni aniqlang.</p>
-      
-      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-        <a class="btn btn-primary" href="{% url 'home' %}" style="padding: 16px 32px; border-radius: 16px;">Paketlarni ko'rish</a>
-        <a class="btn" href="{% url 'login' %}" style="background: var(--glass); border: 1px solid var(--border); padding: 16px 32px; border-radius: 16px;">Profilga kirish</a>
+  <!-- CTA -->
+  <section class="cta-wrap">
+    <div class="cta-card">
+      <h3 class="cta-title">Tayyormisiz?</h3>
+      <p class="cta-text">
+        Qoidalar bilan tanishgan bo'lsangiz, mock topshirishni boshlang va o'z darajangizni aniqlang.
+      </p>
+
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="{% url 'home' %}">Paketlarni ko'rish</a>
+        <a class="btn" href="{% url 'login' %}">Profilga kirish</a>
       </div>
     </div>
   </section>
 
 </div>
+
+<script>
+  // Optional: + / - toggle without any library
+  document.querySelectorAll('.faq-item-card').forEach((d) => {
+    const toggle = d.querySelector('.faq-toggle');
+    const sync = () => { toggle.textContent = d.open ? '–' : '+'; };
+    sync();
+    d.addEventListener('toggle', sync);
+  });
+</script>
 {% endblock %}

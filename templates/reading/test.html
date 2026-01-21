@@ -1,0 +1,229 @@
+{% load static %}
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reading — {{ attempt.mock.title }}</title>
+  <link rel="stylesheet" href="{% static 'assets/style.css' %}">
+</head>
+<body>
+
+<main class="container" style="padding-top:20px">
+
+  <section class="page-head">
+    <div>
+      <h1 class="h1">Reading</h1>
+      <p class="lead">3 ta passage. 40 ta savol. 60 daqiqa.</p>
+    </div>
+
+    <div class="timer-bar">
+      <span class="badge">⏱️ Time left</span>
+      <b id="timerText">60:00</b>
+      <span class="badge">Passage: <b id="passageLabel">1</b>/3</span>
+    </div>
+  </section>
+
+  <div class="card" style="margin-bottom:14px">
+    <div class="p row-between" style="flex-wrap:wrap;gap:10px">
+      <div class="muted">Next/Back passage bo‘yicha ishlaydi.</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn" id="btnPrev" type="button">⬅️ Back</button>
+        <button class="btn btn-primary" id="btnNext" type="button">Next ➡️</button>
+        <button class="btn btn-success" id="btnFinish" type="button">Finish</button>
+      </div>
+    </div>
+  </div>
+
+  {% for passage in passages %}
+  <section class="reading-passage" data-step="{{ forloop.counter }}" {% if not forloop.first %}style="display:none"{% endif %}>
+    <div class="grid" style="display:grid;grid-template-columns:1.2fr 1fr;gap:14px">
+
+      <!-- PASSAGE TEXT -->
+      <div class="card">
+        <div class="p">
+          <div class="card-title">Passage {{ passage.order }}{% if passage.title %} — {{ passage.title }}{% endif %}</div>
+          <div class="hr"></div>
+          <div class="reading-text">
+            {{ passage.content|safe }}
+          </div>
+        </div>
+      </div>
+
+      <!-- QUESTIONS -->
+      <div>
+        {% for group in passage.groups.all %}
+        <div class="card" style="margin-bottom:14px">
+          <div class="p">
+            <div class="row-between" style="gap:10px;flex-wrap:wrap">
+              <div>
+                <div class="card-title">{% if group.title %}{{ group.title }}{% else %}Questions{% endif %}</div>
+                {% if group.instructions %}<div class="muted" style="margin-top:6px">{{ group.instructions }}</div>{% endif %}
+              </div>
+              <span class="badge yellow">{{ group.get_group_type_display }}</span>
+            </div>
+
+            <div class="hr"></div>
+
+            {% for q in group.questions.all %}
+              <div style="margin-top:12px">
+                <p class="muted"><b>Q{{ q.order }}.</b> {{ q.prompt }}</p>
+
+                {% if q.qtype == "short" %}
+                  <input class="input" data-qid="{{ q.id }}" data-qtype="short" placeholder="Answer">
+
+                {% elif q.qtype == "tfng" %}
+                  <select class="input" data-qid="{{ q.id }}" data-qtype="tfng">
+                    <option value="">Select...</option>
+                    <option>True</option><option>False</option><option>Not Given</option>
+                  </select>
+
+                {% elif q.qtype == "yesno" %}
+                  <select class="input" data-qid="{{ q.id }}" data-qtype="yesno">
+                    <option value="">Select...</option>
+                    <option>Yes</option><option>No</option><option>Not Given</option>
+                  </select>
+
+                {% elif q.qtype == "mcq_single" %}
+                  <select class="input" data-qid="{{ q.id }}" data-qtype="mcq_single">
+                    <option value="">Select...</option>
+                    {% for opt in q.options.all %}
+                      <option value="{{ opt.key }}">{{ opt.key }}) {{ opt.text }}</option>
+                    {% endfor %}
+                  </select>
+
+                {% elif q.qtype == "mcq_multi" %}
+                  <div class="muted" data-qid="{{ q.id }}" data-qtype="mcq_multi">
+                    {% for opt in q.options.all %}
+                      <label style="display:block;margin-top:6px">
+                        <input type="checkbox" value="{{ opt.key }}" class="mcq-multi-opt">
+                        {{ opt.key }}) {{ opt.text }}
+                      </label>
+                    {% endfor %}
+                  </div>
+
+                {% elif q.qtype in "heading matching" %}
+                  <input class="input" data-qid="{{ q.id }}" data-qtype="{{ q.qtype }}" placeholder="e.g. iv / A / B">
+
+                {% else %}
+                  <input class="input" data-qid="{{ q.id }}" data-qtype="unknown" placeholder="Answer">
+                {% endif %}
+              </div>
+            {% endfor %}
+
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </section>
+  {% endfor %}
+
+</main>
+
+<script>
+(function(){
+  const TOTAL = Number("{{ total_seconds|default:3600 }}");
+
+  const timerText = document.getElementById("timerText");
+  const parts = Array.from(document.querySelectorAll(".reading-passage"));
+  const passageLabel = document.getElementById("passageLabel");
+  const btnPrev = document.getElementById("btnPrev");
+  const btnNext = document.getElementById("btnNext");
+  const btnFinish = document.getElementById("btnFinish");
+
+  let time = TOTAL;
+  let interval = null;
+  let step = 1;
+
+  function csrfToken(){
+    const name = "csrftoken=";
+    const cookies = document.cookie.split(";");
+    for (let c of cookies){
+      c = c.trim();
+      if (c.startsWith(name)) return decodeURIComponent(c.slice(name.length));
+    }
+    return "";
+  }
+  function post(url, body){
+    const headers = { "X-CSRFToken": csrfToken() };
+    let opts = { method:"POST", headers };
+    if(body){
+      headers["Content-Type"] = "application/x-www-form-urlencoded";
+      opts.body = body;
+    }
+    return fetch(url, opts);
+  }
+  function fmt(s){
+    const m = Math.floor(s/60);
+    const r = s%60;
+    return String(m).padStart(2,'0') + ":" + String(r).padStart(2,'0');
+  }
+  function showTime(){ timerText.textContent = fmt(time); }
+
+  function render(){
+    parts.forEach(p => p.style.display = (Number(p.dataset.step) === step) ? "" : "none");
+    passageLabel.textContent = String(step);
+    btnPrev.disabled = (step === 1);
+    btnNext.textContent = (step === parts.length) ? "Finish ✅" : "Next ➡️";
+  }
+
+  function startTimer(){
+    clearInterval(interval);
+    interval = setInterval(() => {
+      time--;
+      showTime();
+      if(time <= 0){
+        clearInterval(interval);
+        btnFinish.click();
+      }
+    }, 1000);
+  }
+
+  function saveAnswer(qid, value){
+    post("{% url 'reading_save_answer' %}",
+      `question_id=${encodeURIComponent(qid)}&value=${encodeURIComponent(value)}`
+    ).catch(()=>{});
+  }
+
+  document.addEventListener("change", (e) => {
+    const el = e.target;
+
+    if(el.matches("[data-qid][data-qtype]")){
+      saveAnswer(el.getAttribute("data-qid"), el.value || "");
+      return;
+    }
+
+    if(el.classList.contains("mcq-multi-opt")){
+      const wrap = el.closest("[data-qid][data-qtype='mcq_multi']");
+      if(!wrap) return;
+      const qid = wrap.getAttribute("data-qid");
+      const values = Array.from(wrap.querySelectorAll(".mcq-multi-opt:checked")).map(x => x.value);
+      saveAnswer(qid, values.join(","));
+    }
+  });
+
+  btnPrev.addEventListener("click", () => { if(step>1){ step--; render(); }});
+  btnNext.addEventListener("click", () => { if(step<parts.length){ step++; render(); } else { btnFinish.click(); }});
+
+  btnFinish.addEventListener("click", async () => {
+    clearInterval(interval);
+    try{
+      const res = await post("{% url 'reading_submit' %}");
+      const data = await res.json();
+      window.location.href = data.redirect || "/writing/";
+    }catch(e){
+      window.location.href = "/writing/";
+    }
+  });
+
+  // init
+  showTime();
+  render();
+  startTimer();
+})();
+</script>
+
+</body>
+</html>

@@ -9,6 +9,8 @@ urlpatterns = [
     path('mocks/', include('mocks.urls')),
     path('accounts/', include('accounts.urls')),
     path('listening/', include('listening.urls')),
+    path("reading/", include("reading.urls")),
+
 ]
 
 # media serve (dev)

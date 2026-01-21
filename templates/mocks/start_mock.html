@@ -4,67 +4,71 @@
 {% block title %}Imtihonlar ro‘yxati — IELTS CORE{% endblock %}
 
 {% block content %}
-<div class="container" style="padding-top: 80px;">
+<div class="container" style="padding-top: 20px;">
 
-  <header style="margin-bottom: 70px; text-align: center;">
-    <div class="badge-ios" style="margin-bottom: 20px; display: inline-block; color: var(--brand);">
-        <i class="fas fa-layer-group"></i> TEST CATALOGUE
+  <header class="catalog-head">
+    <div class="badge-ios catalog-badge">
+      <i class="fas fa-layer-group"></i> TEST CATALOGUE
     </div>
-    <h1 style="font-size: clamp(40px, 8vw, 60px); letter-spacing: -3px; font-weight: 900; line-height: 1;">
-        O'z darajangizni <br>
-        <span style="background: linear-gradient(to right, #fff, var(--brand)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">aniqlash vaqti</span>
+    <h1 class="catalog-title">
+      O'z darajangizni <br>
+      <span>aniqlash vaqti</span>
     </h1>
-    <p class="lead" style="max-width: 500px; margin: 20px auto; opacity: 0.6;">
-        Professional darajadagi mock testlar to'plami. Tanlang va bilimingizni sinab ko'ring.
+
+    <p class="catalog-lead">
+      Professional darajadagi mock testlar to'plami. Tanlang va bilimingizni sinab ko'ring.
     </p>
   </header>
 
-  <section class="grid grid-3" style="gap: 30px;">
+  <section class="grid grid-3">
     {% for mock in mocks %}
-      <article class="card--ios glass-effect hover-lift">
+      <article class="card--ios hover-lift">
+
         <div class="mock-card-top">
-            <div class="ios-icon-container">
-                <i class="fas fa-graduation-cap"></i>
-            </div>
-            <div class="status-indicator">
-                {% if mock.is_free %}
-                    <span class="ios-pill-green">BEPUL</span>
-                {% else %}
-                    <span class="ios-pill-blue">PREMIUM</span>
-                {% endif %}
-            </div>
+          <div class="ios-icon-container">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+
+          <div class="status-indicator">
+            {% if mock.is_free %}
+              <span class="ios-pill-green">BEPUL</span>
+            {% else %}
+              <span class="ios-pill-blue">PREMIUM</span>
+            {% endif %}
+          </div>
         </div>
 
         <div class="p-ios">
-          <h2 style="font-size: 24px; font-weight: 800; letter-spacing: -1px; margin-bottom: 15px;">{{ mock.title }}</h2>
-          
-          <p class="muted" style="font-size: 14px; line-height: 1.5; margin-bottom: 25px; min-height: 42px;">
+          <h2 class="mock-title">{{ mock.title }}</h2>
+
+          <p class="mock-desc">
             {{ mock.description|truncatechars:85 }}
           </p>
 
           <div class="meta-container">
             <div class="meta-item">
-                <i class="far fa-clock"></i>
-                <span>{{ mock.estimated_minutes }} min</span>
+              <i class="far fa-clock"></i>
+              <span>{{ mock.estimated_minutes }} min</span>
             </div>
             <div class="meta-item">
-                <i class="fas fa-wallet"></i>
-                <span>
-                    {% if mock.is_free %}Free{% else %}{{ mock.price_uzs|floatformat:0 }} s{% endif %}
-                </span>
+              <i class="fas fa-wallet"></i>
+              <span>
+                {% if mock.is_free %}Free{% else %}{{ mock.price_uzs|floatformat:0 }} s{% endif %}
+              </span>
             </div>
           </div>
 
           <a href="{% url 'mock_detail' mock.slug %}" class="btn-ios-action">
             <span>Testni ko'rish</span>
             <div class="circle-arrow">
-                <i class="fas fa-arrow-right"></i>
+              <i class="fas fa-arrow-right"></i>
             </div>
           </a>
         </div>
+
       </article>
     {% empty %}
-      <div class="empty-state-ios glass-effect">
+      <div class="empty-state-ios">
         <div class="empty-icon">📂</div>
         <h3>Hozircha imtihonlar yo'q</h3>
         <p>Tez orada yangi mock testlar qo'shiladi.</p>
@@ -73,103 +77,4 @@
   </section>
 
 </div>
-
-<style>
-  /* Karta strukturasi */
-  .card--ios {
-    border-radius: 32px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .mock-card-top {
-    padding: 30px 30px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-
-  .ios-icon-container {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, var(--brand), #1e4bb1);
-    border-radius: 18px;
-    display: grid;
-    place-items: center;
-    font-size: 24px;
-    color: white;
-    box-shadow: 0 10px 20px rgba(79, 140, 255, 0.2);
-  }
-
-  /* Pill-style status */
-  .ios-pill-green { background: rgba(34, 197, 94, 0.15); color: #4ade80; padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 800; border: 1px solid rgba(34, 197, 94, 0.2); }
-  .ios-pill-blue { background: rgba(79, 140, 255, 0.15); color: #88b1ff; padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 800; border: 1px solid rgba(79, 140, 255, 0.2); }
-
-  .p-ios { padding: 30px; }
-
-  /* Meta ma'lumotlar qatori */
-  .meta-container {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-  }
-
-  .meta-item {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 8px 15px;
-    border-radius: 14px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.03);
-  }
-
-  /* Tugma (SF Pro Style) */
-  .btn-ios-action {
-    background: white;
-    color: black;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 24px;
-    border-radius: 20px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 15px;
-    transition: 0.3s;
-  }
-
-  .btn-ios-action:hover {
-    background: var(--brand);
-    color: white;
-    transform: scale(1.02);
-  }
-
-  .circle-arrow {
-    width: 28px;
-    height: 28px;
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    font-size: 12px;
-  }
-
-  .btn-ios-action:hover .circle-arrow {
-    background: rgba(255, 255, 255, 0.2);
-  }
-
-  /* Bo'sh holat */
-  .empty-state-ios {
-    grid-column: 1/-1;
-    padding: 80px;
-    text-align: center;
-    border-radius: 40px;
-  }
-  .empty-icon { font-size: 50px; margin-bottom: 20px; }
-</style>
 {% endblock %}

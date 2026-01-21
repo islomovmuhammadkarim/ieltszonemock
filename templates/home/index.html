@@ -1,116 +1,91 @@
 {% extends 'layouts/master.html' %}
 {% load static %}
 
-{% block title %}Bosh sahifa | IELTS Mock{% endblock %}
+{% block title %}IELTS CORE{% endblock %}
 
 {% block content %}
-<div class="container">
-  
-  <section style="padding: 60px 0;">
-    <div class="grid grid-2">
-      <div class="hero-text-area">
-        <div class="badge">✅ 5 kun ichida tekshiruv kafolati</div>
-        <h1 class="h1-ios" style="font-size: clamp(42px, 7vw, 70px); letter-spacing: -3px; line-height: 0.9; margin: 25px 0;">
-          IELTS Mock<br>
-          <span style="color: var(--brand);">Platformasi</span>
-        </h1>
-        <p class="lead" style="font-size: 20px; color: var(--muted); margin-bottom: 35px; max-width: 550px;">
-          Writing va Speaking mock topshiring. Bizning ekspertlar sizga xalqaro standartlar asosida ball va batafsil feedback beradi.
-        </p>
+<div class="container" style="padding-top: 60px;">
 
-        <div class="kpi-group" style="display: flex; gap: 12px; margin-bottom: 40px;">
-          <span class="pill">📝 Writing Mock</span>
-          <span class="pill">🎤 Speaking Mock</span>
-          <span class="pill">📊 AI Analysis</span>
-        </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">AI POWERED IELTS PREP</div>
 
-        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-          <a class="btn btn-primary" href="{% url 'home' %}" style="padding: 18px 35px; border-radius: 18px; font-size: 16px;">
-            Narxlarni ko'rish
-          </a>
-          <a class="btn btn-ghost" href="{% url 'mock_list' %}" style="padding: 18px 35px; border-radius: 18px; font-size: 16px; background: var(--glass); border: 1px solid var(--border);">
-            Mockni boshlash
-          </a>
-        </div>
+    <h1 class="hero-title">
+      Kelajak Mock <br>
+      <span class="hero-muted">Sizning qo'lingizda</span>
+    </h1>
 
-        {% if user.is_authenticated %}
-        <p class="muted" style="margin-top: 25px;">Xush kelibsiz, <b>{{ user.username }}</b>!</p>
-        {% endif %}
+    <p class="hero-subtitle">
+      Writing tahlili, Speaking intervyular va avtomatik tekshiriluvchi Listening/Reading testlari.
+    </p>
+  </section>
+
+  <!-- CARDS -->
+  <section id="mock-types">
+    <div class="card-grid">
+
+      <div class="live-card card-listening">
+        <div class="icon-circle icon-blue">🎧</div>
+        <h3 class="card-title">Listening</h3>
+        <p class="card-text">Haqiqiy imtihon audiolari va avtomatik natija.</p>
+        <a class="card-btn btn-blue" href="#">Boshlash</a>
       </div>
 
-      <div class="card card-hero-action" style="box-shadow: 0 0 80px rgba(79, 140, 255, 0.15); border: 1px solid rgba(255,255,255,0.15);">
-        <div class="p" style="padding: 40px;">
-          <h3 style="margin: 0 0 20px; font-size: 24px; font-weight: 800;">Qanday ishlaydi?</h3>
-          <div class="hr"></div>
-
-          <div class="step-ios">
-            <div class="step">
-              <div class="step__n">1</div>
-              <div>
-                <b style="font-size: 16px;">Paket tanlang</b>
-                <div class="muted">O'zingizga mos Writing yoki Speaking mockni sotib oling.</div>
-              </div>
-            </div>
-
-            <div class="step">
-              <div class="step__n">2</div>
-              <div>
-                <b style="font-size: 16px;">Mock topshiring</b>
-                <div class="muted">Writing matnini yozing yoki audioni yuklang.</div>
-              </div>
-            </div>
-
-            <div class="step">
-              <div class="step__n">3</div>
-              <div>
-                <b style="font-size: 16px;">Feedback kuting</b>
-                <div class="muted">5 ish kuni ichida ekspert tahlilini olasiz.</div>
-              </div>
-            </div>
-
-            <div class="step">
-              <div class="step__n">4</div>
-              <div>
-                <b style="font-size: 16px;">Natija dashboardda</b>
-                <div class="muted">Barcha ballar va xatolar tahlili dashboardda tayyor bo'ladi.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hr" style="margin-top: 25px;"></div>
-          <div style="display: flex; gap: 12px; margin-top: 20px;">
-            <a class="btn btn-success" href="{% url 'home' %}" style="flex: 1; padding: 15px;">Sotib olish</a>
-            <a class="btn btn-ghost" href="{% url 'faq' %}" style="border: 1px solid var(--border); padding: 15px;">FAQ</a>
-          </div>
-        </div>
+      <div class="live-card card-reading">
+        <div class="icon-circle icon-green">📖</div>
+        <h3 class="card-title">Reading</h3>
+        <p class="card-text">Akademik matnlar va qulay test topshirish interfeysi.</p>
+        <a class="card-btn btn-green" href="#">Boshlash</a>
       </div>
+
+      <div class="live-card card-writing">
+        <div class="icon-circle icon-purple">✍️</div>
+        <h3 class="card-title">Writing</h3>
+        <p class="card-text">Task 1 va Task 2 uchun ekspert tahlili va ball.</p>
+        <a class="card-btn btn-purple" href="#">Boshlash</a>
+      </div>
+
+      <div class="live-card card-speaking">
+        <div class="icon-circle icon-orange">🗣️</div>
+        <h3 class="card-title">Speaking</h3>
+        <p class="card-text">Audio yozib olish va nutq ravonligi bo'yicha AI tahlil.</p>
+        <a class="card-btn btn-orange" href="#">Boshlash</a>
+      </div>
+
     </div>
   </section>
 
-  <section style="padding: 80px 0;">
-    <div style="margin-bottom: 50px;">
-      <h2 style="font-size: 36px; font-weight: 900; letter-spacing: -1.5px;">Nima olasiz?</h2>
-      <p class="muted">Platformaning eng kuchli imkoniyatlari bilan tanishing.</p>
-    </div>
+  <!-- HOW -->
+  <section id="how" class="how">
+    <div class="how-card">
+      <h2 class="how-title">Qanday ishlaydi?</h2>
 
-    <div class="grid grid-3">
-      <div class="card"><div class="p">
-        <div style="font-size: 35px; margin-bottom: 20px;">📝</div>
-        <h4 style="margin: 0 0 12px; font-size: 20px; font-weight: 800;">Writing Mock</h4>
-        <p class="muted">Haqiqiy imtihon muhiti, Task 1 va Task 2 uchun qulay muharrir.</p>
-      </div></div>
+      <div class="how-steps">
+        <div class="step">
+          <div class="step-dot">1</div>
+          <div>
+            <div class="step-title">Test turini tanlang</div>
+            <div class="step-text">Listening/Reading/Writing/Speaking bo‘limidan birini oching.</div>
+          </div>
+        </div>
 
-      <div class="card"><div class="p">
-        <div style="font-size: 35px; margin-bottom: 20px;">🎤</div>
-        <h4 style="margin: 0 0 12px; font-size: 20px; font-weight: 800;">Speaking Mock</h4>
-        <p class="muted">Audio yozish va yuklash tizimi. Ekspertlar tomonidan individual baholash.</p>
-      </div></div>
+        <div class="step">
+          <div class="step-dot">2</div>
+          <div>
+            <div class="step-title">Topshiring yoki yozib oling</div>
+            <div class="step-text">Testni bajaring, Writing/Speaking natijasini AI tahlil qiladi.</div>
+          </div>
+        </div>
 
-      <div class="card"><div class="p">
-        <div style="font-size: 35px; margin-bottom: 20px;">📊</div>
-        <h4 style="margin: 0 0 12px; font-size: 20px; font-weight: 800;">Progress Tracking</h4>
-        <p class="muted">Natijalaringiz dinamikasini grafiklar orqali kuzatib boring.</p>
-      </div></div>
+        <div class="step">
+          <div class="step-dot">3</div>
+          <div>
+            <div class="step-title">Natijani ko‘ring</div>
+            <div class="step-text">Ball, xatolar, tavsiyalar va progress tracking.</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
